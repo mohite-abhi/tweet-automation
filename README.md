@@ -2,7 +2,7 @@
 
 ## Steps
 
-1. Install python from https://github.com/mohite-abhi/tweet-automation
+1. Install python from https://www.python.org/ftp/python/3.10.4/python-3.10.4-amd64.exe
 2. Install virtualenv
   ```bash
   pip install virtualenv

@@ -2,6 +2,20 @@ import tweepy
 import json
 from cred import *
 import time
+import os
+from imgurUpload import upload_image
+
+def check_ping():
+    hostname = "google.com"
+    response = os.system("ping -n 1 " + hostname)
+    # and then check the response...
+    if response == 0:
+        pingstatus = 1
+    else:
+        pingstatus = 0
+    
+    return pingstatus
+
 
 def upload_tweet(msg):
     client = tweepy.Client(consumer_key=apikey,
@@ -23,10 +37,17 @@ def load_tweet():
         with open('content.json', 'r', encoding="utf8") as filestream:
             content_arr = json.load(filestream)[::-1]
             if content_arr:
-                msg = content_arr.pop()["msg"]
+                content = content_arr.pop()
+                msg = content["msg"]
+                media = content["media"]
+                if media:
+                    link = upload_image(media)
+                else:
+                    link = ""
+                msg = msg + " " + link
                 with open('content.json', 'w') as filestream:
                     json.dump(content_arr[::-1], filestream, indent=4)
-                return msg
+                return msg[:280]
             else:
                 return ''          
     except Exception as e:
@@ -37,7 +58,7 @@ def load_tweet():
 def start_tweet_routine(interval_in_sec = 30, max_number = 120):
     for i in range(120):
         next_tweet = load_tweet()
-        print("Tweet",next_tweet[:5],"... Uploaded Successfully!")
+        print("Tweet: ",next_tweet[:5],"... Uploaded Successfully!")
         if next_tweet == '':
             continue
         upload_status = upload_tweet(next_tweet)
@@ -46,4 +67,9 @@ def start_tweet_routine(interval_in_sec = 30, max_number = 120):
         time.sleep(interval_in_sec)
 
 
-start_tweet_routine(interval_in_sec=10)
+if __name__ == "__main__":
+    internet_working = check_ping()
+    if not internet_working:
+        print("Internet not working")
+    else:
+        start_tweet_routine(interval_in_sec=10)

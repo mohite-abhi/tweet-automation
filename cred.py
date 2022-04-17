@@ -3,3 +3,6 @@ apikeysecret = "KaFdXVYGcn8v73ecosyac9CkRMZkCXpLp3GUPZy9Xv0iFpsIzJ"
 accesstoken = "2560081529-i3kQCfrHZBIsQ45IjJzYfmVTjpMddtHd7zNL1cv"
 accesstokensecret = "mxGfDQ3jLe5lzUyr60zh6MjJzGldYU1OjcM6tp8uIKRhX"
 bearertoken = "AAAAAAAAAAAAAAAAAAAAAABabgEAAAAA8urgkHTdrarWdsFiP%2BF%2B43Cbrns%3DjdAYri9JEn2Ek5z1mUK4aCMJ3nyd2T0yem62PL2rf303g4xlKZ"
+
+imgurclientid = "99e31d72b1a8014"
+imgurclientsecret = "be6b3fe5c22ed1f1b470124f08828d52330121fc"
